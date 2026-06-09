@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Detroit Drifters — Game Night Fundraiser 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Montserrat:wght@400;600;700;800&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --coral: #D4654A;
+    --coral-light: #E8896F;
+    --coral-pale: #FAE8E3;
+    --silver: #A8ADAF;
+    --silver-light: #D4D8DA;
+    --silver-dark: #6E7476;
+    --dark: #1C1C1C;
+    --white: #FFFFFF;
+    --card-red: #C8102E;
+  }
+
+  body {
+    background: #ece9e6;
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 40px 20px;
+  }
+
+  .flyer {
+    width: 8.5in;
+    min-height: 11in;
+    background: var(--white);
+    color: var(--dark);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+  }
+
+  .flyer::before {
+    content: '';
+    position: absolute;
+    inset: 16px;
+    border: 2.5px solid var(--coral);
+    pointer-events: none;
+    z-index: 10;
+  }
+  .flyer::after {
+    content: '';
+    position: absolute;
+    inset: 22px;
+    border: 1px solid var(--silver-light);
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  .corner {
+    position: absolute;
+    font-size: 20px;
+    color: var(--coral);
+    z-index: 11;
+    line-height: 1;
+  }
+  .corner.tl { top: 30px; left: 30px; }
+  .corner.tr { top: 30px; right: 30px; transform: scaleX(-1); }
+  .corner.bl { bottom: 30px; left: 30px; transform: scaleY(-1); }
+  .corner.br { bottom: 30px; right: 30px; transform: scale(-1); }
+
+  /* Decorative corner clipart */
+  .clip-corner {
+    position: absolute;
+    z-index: 2;
+    opacity: 0.9;
+    pointer-events: none;
+  }
+  .clip-corner.dice-tl  { top: 62px; left: 54px; transform: rotate(-12deg); }
+  .clip-corner.domino-br { bottom: 58px; right: 52px; transform: rotate(8deg); }
+
+  /* Background watermark suits */
+  .bg-suits {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    opacity: 0.04;
+    font-size: 34px;
+    pointer-events: none;
+    z-index: 1;
+    color: var(--coral);
+    align-items: center;
+    justify-items: center;
+  }
+
+  /* Hero clipart */
+  .hero-art {
+    margin: 6px 0 4px;
+    height: 120px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  /* Suit divider accent */
+  .divider-suits {
+    color: var(--coral);
+    font-size: 16px;
+    letter-spacing: 8px;
+  }
+
+  .content {
+    position: relative;
+    z-index: 5;
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 52px 64px 52px;
+  }
+
+  .logo-band {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 6px;
+  }
+  .org-name {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--silver-dark);
+    white-space: nowrap;
+  }
+
+  .presents {
+    font-size: 9.5px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--silver);
+    margin-bottom: 18px;
+  }
+
+  .title-block {
+    text-align: center;
+    margin-bottom: 14px;
+  }
+  .title-game {
+    font-family: 'Playfair Display', serif;
+    font-size: 86px;
+    font-weight: 900;
+    line-height: 0.88;
+    color: var(--dark);
+    display: block;
+  }
+  .title-night {
+    font-family: 'Playfair Display', serif;
+    font-size: 86px;
+    font-weight: 900;
+    line-height: 0.88;
+    color: var(--coral);
+    display: block;
+  }
+  .title-fundraiser {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 10px;
+    text-transform: uppercase;
+    color: var(--silver-dark);
+    display: block;
+    margin-top: 10px;
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: 82%;
+    margin: 16px auto;
+  }
+  .divider-line {
+    flex: 1;
+    height: 1.5px;
+    background: linear-gradient(to right, transparent, var(--coral), transparent);
+  }
+
+  .details-band {
+    background: var(--coral-pale);
+    border: 1.5px solid var(--silver-light);
+    border-left: 4px solid var(--coral);
+    border-radius: 4px;
+    width: 84%;
+    padding: 18px 28px;
+    margin-bottom: 16px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px 30px;
+  }
+  .detail-item { display: flex; flex-direction: column; gap: 2px; }
+  .detail-item.full { grid-column: 1 / -1; }
+  .detail-label {
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--coral);
+  }
+  .detail-value {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--dark);
+    line-height: 1.2;
+  }
+  .detail-sub {
+    font-size: 11px;
+    color: var(--silver-dark);
+    margin-top: 2px;
+  }
+
+  .ticket-callout {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 16px;
+  }
+  .ticket-price {
+    background: var(--coral);
+    color: var(--white);
+    font-size: 48px;
+    font-weight: 900;
+    font-family: 'Playfair Display', serif;
+    padding: 10px 26px;
+    border-radius: 4px;
+    line-height: 1;
+    box-shadow: 3px 3px 0 var(--silver-light);
+  }
+  .ticket-includes { display: flex; flex-direction: column; gap: 5px; }
+  .ticket-includes .per-person {
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--silver);
+  }
+  .ticket-includes .includes-items {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--dark);
+  }
+  .ticket-includes .includes-items span { color: var(--coral); margin: 0 5px; }
+
+  .games-row {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 0;
+  }
+  .game-tag {
+    background: var(--white);
+    border: 1.5px solid var(--silver-light);
+    color: var(--silver-dark);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 2px;
+  }
+  .game-tag.coral-tag {
+    border-color: var(--coral-light);
+    color: var(--coral);
+  }
+
+  /* Silver divider */
+  .silver-divider {
+    width: 84%;
+    height: 1px;
+    background: var(--silver-light);
+    margin: 16px 0;
+  }
+
+  /* Member contact section */
+  .member-section {
+    width: 84%;
+    background: var(--white);
+    border: 2px solid var(--coral);
+    border-radius: 4px;
+    padding: 14px 24px;
+    margin-top: auto;
+  }
+  .member-header {
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--coral);
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  .member-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+  }
+  .member-field { display: flex; flex-direction: column; gap: 3px; }
+  .member-field label {
+    font-size: 7.5px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--silver);
+  }
+  .member-field .field-value {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--dark);
+    border-bottom: 1.5px solid var(--silver-light);
+    padding-bottom: 4px;
+    min-height: 22px;
+  }
+
+  .tagline {
+    position: absolute;
+    bottom: 32px;
+    font-size: 7.5px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--silver);
+    z-index: 11;
+  }
+</style>
+</head>
+<body>
+
+<div class="flyer">
+  <span class="corner tl">✦</span>
+  <span class="corner tr">✦</span>
+  <span class="corner bl">✦</span>
+  <span class="corner br">✦</span>
+
+  <div class="bg-suits">
+    <span>♠</span><span>♥</span><span>♦</span><span>♣</span><span>♠</span><span>♥</span><span>♦</span><span>♣</span>
+    <span>♥</span><span>♦</span><span>♣</span><span>♠</span><span>♥</span><span>♦</span><span>♣</span><span>♠</span>
+    <span>♦</span><span>♣</span><span>♠</span><span>♥</span><span>♦</span><span>♣</span><span>♠</span><span>♥</span>
+    <span>♣</span><span>♠</span><span>♥</span><span>♦</span><span>♣</span><span>♠</span><span>♥</span><span>♦</span>
+    <span>♠</span><span>♥</span><span>♦</span><span>♣</span><span>♠</span><span>♥</span><span>♦</span><span>♣</span>
+    <span>♥</span><span>♦</span><span>♣</span><span>♠</span><span>♥</span><span>♦</span><span>♣</span><span>♠</span>
+    <span>♦</span><span>♣</span><span>♠</span><span>♥</span><span>♦</span><span>♣</span><span>♠</span><span>♥</span>
+    <span>♣</span><span>♠</span><span>♥</span><span>♦</span><span>♣</span><span>♠</span><span>♥</span><span>♦</span>
+    <span>♠</span><span>♥</span><span>♦</span><span>♣</span><span>♠</span><span>♥</span><span>♦</span><span>♣</span>
+    <span>♥</span><span>♦</span><span>♣</span><span>♠</span><span>♥</span><span>♦</span><span>♣</span><span>♠</span>
+  </div>
+
+  <div class="clip-corner dice-tl">
+    <svg width="58" height="46" viewBox="0 0 58 46" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <g transform="rotate(-8 18 26)">
+        <rect x="4" y="14" width="24" height="24" rx="5" fill="#FFFFFF" stroke="#D4654A" stroke-width="1.5"/>
+        <g fill="#D4654A">
+          <circle cx="11" cy="21" r="2"/><circle cx="21" cy="21" r="2"/>
+          <circle cx="16" cy="26" r="2"/>
+          <circle cx="11" cy="31" r="2"/><circle cx="21" cy="31" r="2"/>
+        </g>
+      </g>
+      <g transform="rotate(12 40 22)">
+        <rect x="28" y="6" width="22" height="22" rx="5" fill="#D4654A" stroke="#B9523C" stroke-width="1.5"/>
+        <g fill="#FFFFFF">
+          <circle cx="34" cy="12" r="1.9"/><circle cx="44" cy="12" r="1.9"/>
+          <circle cx="34" cy="22" r="1.9"/><circle cx="44" cy="22" r="1.9"/>
+        </g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="clip-corner domino-br">
+    <svg width="64" height="50" viewBox="0 0 64 50" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <g transform="rotate(-10 20 25)">
+        <rect x="6" y="8" width="26" height="40" rx="5" fill="#FFFFFF" stroke="#A8ADAF" stroke-width="1.4"/>
+        <line x1="8" y1="28" x2="30" y2="28" stroke="#A8ADAF" stroke-width="1.4"/>
+        <g fill="#1C1C1C">
+          <circle cx="13" cy="15" r="2.2"/><circle cx="25" cy="15" r="2.2"/>
+          <circle cx="13" cy="21" r="2.2"/><circle cx="25" cy="21" r="2.2"/>
+        </g>
+        <g fill="#D4654A"><circle cx="19" cy="38" r="2.2"/></g>
+      </g>
+      <g transform="rotate(16 44 26)">
+        <rect x="34" y="12" width="24" height="36" rx="5" fill="#FAE8E3" stroke="#A8ADAF" stroke-width="1.4"/>
+        <line x1="36" y1="30" x2="56" y2="30" stroke="#A8ADAF" stroke-width="1.4"/>
+        <g fill="#D4654A">
+          <circle cx="42" cy="18" r="2"/><circle cx="50" cy="18" r="2"/>
+          <circle cx="46" cy="24" r="2"/>
+        </g>
+        <g fill="#1C1C1C">
+          <circle cx="42" cy="36" r="2"/><circle cx="50" cy="36" r="2"/>
+          <circle cx="42" cy="43" r="2"/><circle cx="50" cy="43" r="2"/>
+        </g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="content">
+    <div class="logo-band">
+      <span class="org-name">The Detroit Chapter &nbsp;·&nbsp; The National Drifters, Inc.</span>
+    </div>
+
+    <div class="presents">— Proudly Presents —</div>
+
+    <div class="hero-art">
+      <svg width="300" height="120" viewBox="0 0 300 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <filter id="cardShadowW" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="2.5" stdDeviation="2.2" flood-color="#1C1C1C" flood-opacity="0.22"/>
+          </filter>
+        </defs>
+
+        <!-- Poker chips: coral base + white/coral top chip -->
+        <g transform="translate(40,88)">
+          <ellipse cx="0" cy="20" rx="26" ry="9" fill="#1C1C1C" opacity="0.12"/>
+          <g>
+            <ellipse cx="0" cy="10" rx="24" ry="8.5" fill="#B9523C"/>
+            <ellipse cx="0" cy="6"  rx="24" ry="8.5" fill="#D4654A" stroke="#A8ADAF" stroke-width="1"/>
+            <ellipse cx="0" cy="6"  rx="14" ry="5"   fill="none" stroke="#FAE8E3" stroke-width="2" stroke-dasharray="3 4"/>
+          </g>
+          <g transform="translate(2,-9)">
+            <ellipse cx="0" cy="10" rx="24" ry="8.5" fill="#E0E0E0"/>
+            <ellipse cx="0" cy="6"  rx="24" ry="8.5" fill="#FFFFFF" stroke="#D4654A" stroke-width="2"/>
+            <ellipse cx="0" cy="6"  rx="14" ry="5"   fill="none" stroke="#D4654A" stroke-width="2" stroke-dasharray="3 4"/>
+          </g>
+        </g>
+
+        <!-- Fanned cards: true red & black -->
+        <g filter="url(#cardShadowW)">
+          <g transform="translate(120,62) rotate(-22)">
+            <rect x="-26" y="-38" width="52" height="76" rx="6" fill="#FFFFFF" stroke="#D4D8DA" stroke-width="1.2"/>
+            <text x="-19" y="-22" font-family="Georgia, serif" font-size="13" font-weight="700" fill="#1C1C1C" text-anchor="middle">K</text>
+            <text x="-19" y="-10" font-family="Georgia, serif" font-size="11" fill="#1C1C1C" text-anchor="middle">&#9824;</text>
+            <text x="0" y="9" font-family="Georgia, serif" font-size="30" fill="#1C1C1C" text-anchor="middle">&#9824;</text>
+          </g>
+          <g transform="translate(150,56) rotate(-7)">
+            <rect x="-26" y="-40" width="52" height="78" rx="6" fill="#FFFFFF" stroke="#D4D8DA" stroke-width="1.2"/>
+            <text x="-19" y="-24" font-family="Georgia, serif" font-size="13" font-weight="700" fill="#C8102E" text-anchor="middle">A</text>
+            <text x="-19" y="-12" font-family="Georgia, serif" font-size="11" fill="#C8102E" text-anchor="middle">&#9829;</text>
+            <text x="0" y="11" font-family="Georgia, serif" font-size="34" fill="#C8102E" text-anchor="middle">&#9829;</text>
+          </g>
+          <g transform="translate(180,60) rotate(9)">
+            <rect x="-26" y="-39" width="52" height="77" rx="6" fill="#FFFFFF" stroke="#D4D8DA" stroke-width="1.2"/>
+            <text x="-19" y="-23" font-family="Georgia, serif" font-size="13" font-weight="700" fill="#C8102E" text-anchor="middle">Q</text>
+            <text x="-19" y="-11" font-family="Georgia, serif" font-size="11" fill="#C8102E" text-anchor="middle">&#9830;</text>
+            <text x="0" y="10" font-family="Georgia, serif" font-size="30" fill="#C8102E" text-anchor="middle">&#9830;</text>
+          </g>
+          <g transform="translate(206,68) rotate(24)">
+            <rect x="-26" y="-38" width="52" height="76" rx="6" fill="#FFFFFF" stroke="#D4D8DA" stroke-width="1.2"/>
+            <text x="-19" y="-22" font-family="Georgia, serif" font-size="13" font-weight="700" fill="#1C1C1C" text-anchor="middle">A</text>
+            <text x="-19" y="-10" font-family="Georgia, serif" font-size="11" fill="#1C1C1C" text-anchor="middle">&#9827;</text>
+            <text x="0" y="9" font-family="Georgia, serif" font-size="30" fill="#1C1C1C" text-anchor="middle">&#9827;</text>
+          </g>
+        </g>
+
+        <!-- Domino -->
+        <g transform="translate(258,74) rotate(14)">
+          <rect x="-15" y="-26" width="30" height="52" rx="5" fill="#FFFFFF" stroke="#A8ADAF" stroke-width="1.4"/>
+          <line x1="-13" y1="0" x2="13" y2="0" stroke="#A8ADAF" stroke-width="1.4"/>
+          <g fill="#D4654A">
+            <circle cx="-6" cy="-18" r="2.6"/><circle cx="6" cy="-18" r="2.6"/>
+            <circle cx="-6" cy="-7"  r="2.6"/><circle cx="6" cy="-7"  r="2.6"/>
+          </g>
+          <g fill="#1C1C1C">
+            <circle cx="-7" cy="7"  r="2.6"/><circle cx="7" cy="7"  r="2.6"/>
+            <circle cx="0"  cy="13" r="2.6"/>
+            <circle cx="-7" cy="19" r="2.6"/><circle cx="7" cy="19" r="2.6"/>
+          </g>
+        </g>
+      </svg>
+    </div>
+
+    <div class="title-block">
+      <span class="title-game">GAME</span>
+      <span class="title-night">NIGHT</span>
+      <span class="title-fundraiser">Fundraiser</span>
+    </div>
+
+    <div class="divider">
+      <div class="divider-line"></div>
+      <div class="divider-suits">♠ ♥ ♦ ♣</div>
+      <div class="divider-line"></div>
+    </div>
+
+    <div class="details-band">
+      <div class="detail-item">
+        <span class="detail-label">Date</span>
+        <span class="detail-value">Sunday, September 20, 2026</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">Time</span>
+        <span class="detail-value">4:00 PM – 8:00 PM</span>
+      </div>
+      <div class="detail-item full">
+        <span class="detail-label">Venue</span>
+        <span class="detail-value">Tompkins Community Center</span>
+        <span class="detail-sub">15115 East Jefferson Avenue &nbsp;·&nbsp; Grosse Pointe Park, Michigan 48230</span>
+      </div>
+      <div class="detail-item full">
+        <span class="detail-label">Attire</span>
+        <span class="detail-value">Casual</span>
+      </div>
+    </div>
+
+    <div class="ticket-callout">
+      <div class="ticket-price">$50</div>
+      <div class="ticket-includes">
+        <span class="per-person">per person</span>
+        <span class="includes-items">Games <span>·</span> Food <span>·</span> Drinks <span>·</span> Fun <span>·</span> Prizes</span>
+      </div>
+    </div>
+
+    <div class="games-row">
+      <span class="game-tag coral-tag">♠ Spades</span>
+      <span class="game-tag">♥ Bid Whist</span>
+      <span class="game-tag coral-tag">♣ Poker</span>
+      <span class="game-tag">UNO</span>
+      <span class="game-tag coral-tag">Dominoes</span>
+      <span class="game-tag">Raffle</span>
+      <span class="game-tag coral-tag">& More!</span>
+    </div>
+
+    <div class="silver-divider"></div>
+
+    <div class="member-section">
+      <div class="member-header">For Tickets, Contact</div>
+      <div class="member-grid">
+        <div class="member-field">
+          <label>Drifter</label>
+          <div class="field-value">&nbsp;</div>
+        </div>
+        <div class="member-field">
+          <label>Phone</label>
+          <div class="field-value">&nbsp;</div>
+        </div>
+        <div class="member-field">
+          <label>Email</label>
+          <div class="field-value">&nbsp;</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tagline">Strengthening Our Families · Building Better Communities · Est. 1956</div>
+</div>
+
+</body>
+</html>
